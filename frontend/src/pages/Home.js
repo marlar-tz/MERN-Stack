@@ -7,7 +7,7 @@ import WorkoutForm from '../components/Workoutform'
 
 
 const Home = () => {
-    const {workouts , dispatch} = useWorkoutsContext()
+    const { workouts, dispatch } = useWorkoutsContext()
 
     useEffect(() => {
         const fetchWorkouts = async () => {
@@ -15,7 +15,7 @@ const Home = () => {
             const json = await response.json()
 
             if (response.ok) {
-                dispatch({type:'SET_WORKOUTS',payload:json})
+                dispatch({ type: 'SET_WORKOUTS', payload: json })
             }
         }
 
@@ -26,7 +26,7 @@ const Home = () => {
         <div className="home">
             <div className="workouts">
                 {workouts && workouts.map((workout) => (
-                   <WorkoutDetails keys={workout._id} workout={workout}/>
+                    <WorkoutDetails keys={workout._id} workout={workout} />
                 )
                 )}
             </div>
