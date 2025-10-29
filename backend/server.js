@@ -18,12 +18,17 @@ app.use((req, res, next) => {
 })
 
 
+
+
 // routes - react to request
 app.use('/api/workouts', workoutRoutes)
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
+
+        // test
+        app.get('/', (req, res) => res.status(200).json({ message: 'Hello World' }))
 
         // listen for request
         app.listen(process.env.PORT, () => {
