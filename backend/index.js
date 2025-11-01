@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => {
 
         // test
-        app.get('/', (req, res) => res.status(200).json({ message: 'Hello World' }))
+        app.get('/', (req, res) => res.status(200).json({ message: 'Server is running on Vercel!' }))
 
         // listen for request
         app.listen(process.env.PORT, () => {
@@ -39,5 +39,6 @@ mongoose.connect(process.env.MONGO_URI)
         console.log(error)
     })
 
+module.exports = app;
 
 
