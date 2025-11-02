@@ -13,17 +13,22 @@ app.use(express.json())
 app.use(cors())
 
 app.use((req, res, next) => {
-  res.setHeader(
-    'Content-Security-Policy',
-    "default-src 'self'; img-src 'self' data: https:; script-src 'self'; style-src 'self' 'unsafe-inline'"
-  );
-  next();
+    res.setHeader(
+        'Content-Security-Policy',
+        "default-src 'self'; img-src 'self' data: https:; script-src 'self'; style-src 'self' 'unsafe-inline'"
+    );
+    next();
 });
 
 app.use((req, res, next) => {
     console.log(req.path, req.method);
     next();
 })
+
+// ✅ Root route should be defined here
+app.get('/', (req, res) => {
+    res.status(200).json({ message: 'Server is running on Vercel!' });
+});
 
 // routes - react to request
 app.use('/api/workouts', workoutRoutes)
@@ -32,8 +37,6 @@ app.use('/api/workouts', workoutRoutes)
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
 
-        // test
-        app.get('/', (req, res) => res.status(200).json({ message: 'Server is running on Vercel!' }))
 
         // listen for request
         app.listen(process.env.PORT, () => {
